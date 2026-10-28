@@ -1,26 +1,105 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  color-scheme: light;
+  --bg: #f4f4f2;
+  --surface: #fcfcfb;
+  --surface-2: #f0f0ed;
+  --border: #e2e1dc;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #76756f;
+  --accent: #2a78d6;
+  --accent-ink: #ffffff;
+  --good: #1a7f4b;
+  --warn: #a86a00;
+  --bad: #c53030;
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --series-5: #e87ba4;
+  --series-6: #008300;
+  --series-7: #6250d6;
+  --series-8: #e34948;
+  --seq-0: #e8f0fb;
+  --seq-1: #2a78d6;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #121211;
+    --surface: #1a1a19;
+    --surface-2: #232321;
+    --border: #2f2f2c;
+    --ink: #f0efec;
+    --ink-2: #c3c2b7;
+    --muted: #8f8e86;
+    --accent: #3987e5;
+    --good: #43b87b;
+    --warn: #e0a030;
+    --bad: #ef6b6b;
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-4: #c98500;
+    --series-5: #d55181;
+    --series-6: #008300;
+    --series-7: #9085e9;
+    --series-8: #e66767;
+    --seq-0: #1d2a3b;
+    --seq-1: #3987e5;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #121211;
+  --surface: #1a1a19;
+  --surface-2: #232321;
+  --border: #2f2f2c;
+  --ink: #f0efec;
+  --ink-2: #c3c2b7;
+  --muted: #8f8e86;
+  --accent: #3987e5;
+  --good: #43b87b;
+  --warn: #e0a030;
+  --bad: #ef6b6b;
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --series-5: #d55181;
+  --series-6: #008300;
+  --series-7: #9085e9;
+  --series-8: #e66767;
+  --seq-0: #1d2a3b;
+  --seq-1: #3987e5;
 }
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface-2);
+  --color-line: var(--border);
+  --color-ink: var(--ink);
+  --color-ink2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-good: var(--good);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
+  --font-sans: var(--font-geist-sans), "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+}
+
+.tabular { font-variant-numeric: tabular-nums; }
+.recharts-text, .recharts-cartesian-axis-tick-value { fill: var(--ink-2); font-size: 12px; }
+.recharts-cartesian-grid line { stroke: var(--border); }
+.recharts-tooltip-wrapper { outline: none; }
