@@ -65,9 +65,19 @@ tests/               엔진·파서 테스트 (샘플 CRM KPI를 독립 계산�
 | 린트 오류 3건 | 렌더 중 ref 갱신, effect 내 동기 `setState` | 상태 직접 참조, `useSyncExternalStore`로 localStorage 읽기 |
 | xlsx 패키지 취약점 경고 | npm `xlsx` 구버전 | `exceljs`로 대체 |
 
+## 바우처 코드 접속
+
+모든 화면(샘플 CSV 포함)은 바우처 코드를 입력해야 접속할 수 있습니다. **초기 코드는 `1234`** 입니다.
+
+- 코드는 서버(`/api/access`)에서 검증하고, 통과하면 서명된 httpOnly 쿠키(7일)를 발급합니다. `src/proxy.ts`가 쿠키가 없거나 위조된 요청을 `/access`로 보냅니다.
+- 코드 변경: 환경변수 `VOUCHER_CODES`(쉼표로 여러 개). 코드를 바꾸면 기존 세션이 모두 무효화됩니다.
+- 운영 환경에서는 `ACCESS_SECRET`(서명 키)이 **필수**입니다. 없으면 접속이 모두 거부됩니다 (`openssl rand -hex 32`).
+- 이 리포지토리는 공개이므로 소스에 적힌 초기 코드 `1234`는 누구나 볼 수 있습니다. 실제 운영 전 `VOUCHER_CODES`로 바꾸세요.
+- 이 장치는 접속 제어용 낙관적 검사이며 사용자별 데이터 격리(Phase 4 인증)를 대체하지 않습니다. 접속 시도 횟수 제한은 없고 응답 지연(0.6초)만 있습니다.
+
 ## 배포 (Vercel)
 
-환경변수 없이 배포됩니다. Framework Preset은 Next.js, 빌드 명령은 기본값(`next build`)을 사용합니다.
+Framework Preset은 Next.js, 빌드 명령은 기본값(`next build`)을 사용합니다. 환경변수 `ACCESS_SECRET`을 설정해야 접속이 가능합니다. `VOUCHER_CODES`는 선택입니다.
 
 ## 현재 한계
 

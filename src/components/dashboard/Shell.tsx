@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useStoredString } from "@/lib/hooks";
 
@@ -37,6 +37,7 @@ function ThemeToggle() {
 
 export function Shell({ children }: { children: React.ReactNode }) {
   const path = usePathname();
+  const router = useRouter();
   return (
     <div className="min-h-screen">
       <header className="sticky top-0 z-20 border-b border-line bg-surface/90 backdrop-blur">
@@ -58,8 +59,18 @@ export function Shell({ children }: { children: React.ReactNode }) {
               );
             })}
           </nav>
-          <div className="ml-auto">
+          <div className="ml-auto flex items-center gap-2">
             <ThemeToggle />
+            <button
+              type="button"
+              className="rounded-lg border border-line px-2.5 py-1 text-xs text-ink2 hover:bg-surface2"
+              onClick={async () => {
+                await fetch("/api/access", { method: "DELETE" });
+                router.push("/access");
+              }}
+            >
+              접속 종료
+            </button>
           </div>
         </div>
       </header>
